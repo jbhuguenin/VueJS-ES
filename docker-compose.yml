@@ -1,0 +1,20 @@
+version: '2'
+
+services:
+  #------------------------------------------------------------
+  # Web server - For live reload and development
+  # This environment can be used to run npm and node
+  # commands as well
+  # Credits: http://github.com/codecasts/ambientum
+  #------------------------------------------------------------
+  dev:
+    image: ambientum/node:8
+    container_name: sandbox-vue-dev
+    command: bash -c "npm install && npm run dev"
+    volumes:
+      - .:/var/www/app
+    ports:
+      - 8080:8080
+    environment:
+      - HOST=0.0.0.0
+
