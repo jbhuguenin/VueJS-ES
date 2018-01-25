@@ -24,6 +24,39 @@ export default {
             }
             return color;
         },
+        getStateCode(stateLabel) {
+          let stateCode = "";
+          switch(stateLabel) {
+            case "UP":
+            case "OK":
+              stateCode = 0;
+            break;
+            case "UNKNOWN":
+              stateCode = 3;
+            break;
+            case "CRITICAL":
+            case "DOWN":
+              stateCode = 2;
+            break;
+          }
+          return stateCode;
+        },
+        getStateLabel(stateCode) {
+          let stateLabel = "";
+
+          switch(stateCode) {
+            case 0:
+              stateLabel = "OK";
+            break;
+            case 2:
+              stateLabel = "CRITICAL";
+            break;
+            case 3:
+              stateLabel = "UNKNOWN";
+            break;
+          }
+          return stateLabel;
+        },
         getClient() {
           return Elasticsearch.Client({
             host: process.env.ES_HOST,
