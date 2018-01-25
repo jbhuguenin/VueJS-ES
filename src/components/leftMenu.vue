@@ -1,5 +1,5 @@
 <template>
-    <el-menu default-active="/"  background-color="#212120" text-color="#F4F3EF" active-text-color="#2D93CE" router=true>
+    <el-menu default-active="/"  background-color="#212120" text-color="#F4F3EF" active-text-color="#2D93CE" :router=true>
         <el-menu-item index="/params">
             <i class="el-icon-info"></i>
             <span slot="title">jbhuguenin</span>
