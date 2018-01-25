@@ -48,13 +48,13 @@ export default {
             "aggs": 
             {
                 "nagios_states": {
-                "terms": {
-                    "field": "nagios_state.keyword",
-                    "size": 5,
-                    "order": {
-                    "_count": "desc"
+                    "terms": {
+                        "field": "nagios_state.keyword",
+                        "size": 5,
+                        "order": {
+                        "_count": "desc"
+                        }
                     }
-                }
                 }
             },
             "query": 
