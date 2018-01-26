@@ -57,6 +57,19 @@ export default {
           }
           return stateLabel;
         },
+        getStateIconClass(state) {
+          switch(state) {
+            case 0:
+             return 'el-icon-success';
+            break;
+            case 3:
+              return 'el-icon-warning';
+              break;
+            case 2: 
+              return 'el-icon-error';
+              break;
+          }
+        },
         getClient() {
           return Elasticsearch.Client({
             host: process.env.ES_HOST,

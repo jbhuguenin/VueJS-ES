@@ -1,10 +1,20 @@
 <template>
     <el-card class="box-card widget">
         <div slot="header" class="clearfix">
-            <i class="el-icon-question"></i> <span >Last Events</span>
+            <el-row :gutter="20">
+                <el-col :span="4">
+                    <i class="el-icon-question"></i> <span >Nagios: Last Events</span>
+                </el-col>
+                <el-col :span="20">
+                    <el-input placeholder="search ..." v-model="searchTerm" style="float:right;">
+                        <el-button slot="append" icon="el-icon-search" @click="getTableData(searchTerm)"></el-button>
+                    </el-input>
+                </el-col>
+            </el-row>
         </div>
         <div style="width:100%;max-height:300px;">
         <el-table :data="tableData.data" height="300" :row-class-name="tableRowClassName"  v-loading="tableData.loading">
+            <div slot="empty">No data to display</div>
             <el-table-column type="expand">
             <template slot-scope="props">
                 <p style="font-size:12px;"> Message: {{ props.row.nagios_message}}</p>
@@ -17,10 +27,10 @@
             <el-table-column prop="nagios_state" label="State"></el-table-column>
             <el-table-column prop="nagios_service" label="Service"></el-table-column>
             <el-table-column label="Operations" width="180">
-            <template slot-scope="scope">
-                <el-button icon="el-icon-zoom-in" size="small"></el-button>
-                <el-button icon="el-icon-edit" size="small"  @click="openStash(scope.$index, scope.row)"></el-button>
-            </template>
+                <template slot-scope="scope">
+                    <el-button icon="el-icon-zoom-in" size="small"></el-button>
+                    <el-button icon="el-icon-edit" size="small"  @click="openStash(scope.$index, scope.row)"></el-button>
+                </template>
             </el-table-column>
         </el-table>
         </div>
@@ -57,6 +67,7 @@ export default {
     mixins: [ChartMixin],
     data: function() {
         return {
+            searchTerm: "",
             formData: {},
             dialogVisible: false,
             tableData: {
@@ -98,6 +109,7 @@ export default {
             return row.nagios_state.toLowerCase() + '-row';
         },
         getTableData(term) {
+            let query = (term)? term : "*";
             this.tableData.loading = true;
             var self = this;
             this.getClient().search({
@@ -114,7 +126,7 @@ export default {
                     },
                     {
                         "query_string": {
-                        "query": term,
+                        "query": query,
                         "analyze_wildcard": true,
                         "default_field": "*"
                         }
@@ -147,4 +159,5 @@ export default {
     }
 }
 </script>
+
 
