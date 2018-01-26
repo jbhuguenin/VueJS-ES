@@ -69,3 +69,17 @@ body {
   .up-row {
     background-color: #f0f9eb !important;
   }
+
+  i.el-icon-success {
+    color:chartreuse;
+    font-size: 1.8em;
+  }
+  i.el-icon-warning {
+    color:rgb(248, 176, 42);
+    font-size: 1.8em;
+  }
+  
+  i.el-icon-error {
+    color:rgb(248, 33, 26);
+    font-size: 1.8em;
+  }
