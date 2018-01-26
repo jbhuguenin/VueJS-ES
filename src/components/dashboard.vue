@@ -16,7 +16,12 @@
             </el-row>
             <el-row :gutter="20">
                 <el-col :span="24">
-                <grid-widget ref="grid" />
+                    <nagios-grid-widget ref="nagios" />
+                </el-col>
+            </el-row>
+            <el-row :gutter="20">
+                <el-col :span="24">
+                    <sophos-grid-widget ref="sophos" />
                 </el-col>
             </el-row>
         </el-col>
@@ -26,11 +31,12 @@
 <script>
 import  DoughnutWidget from './widget/doughnut.vue'
 import  BarchartWidget from './widget/barChart.vue'
-import  GridWidget from './widget/grid.vue'
+import  NagiosGridWidget from './widget/nagiosGrid.vue'
+import  SophosGridWidget from './widget/sophosGrid.vue'
 
 export default {
     components: {
-        DoughnutWidget, BarchartWidget, GridWidget
+        DoughnutWidget, BarchartWidget, NagiosGridWidget, SophosGridWidget
     },
     mounted: function() {
         this.search("*");
@@ -46,7 +52,8 @@ export default {
 
             this.$refs.doughnut.getDoughnutData(term);
             this.$refs.barchart.getBarData(term);
-            this.$refs.grid.getTableData(term);
+            this.$refs.nagios.getTableData(term);
+            this.$refs.sophos.getData(term);
         }
     }
 }
