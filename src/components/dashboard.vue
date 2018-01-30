@@ -8,10 +8,10 @@
             </div>
             <el-row :gutter="20">
                 <el-col :span="12">
-                <doughnut-widget ref="doughnut"/>
+                    <doughnut-widget ref="doughnut"/>
                 </el-col>
                 <el-col :span="12">
-                <barchart-widget ref="barchart" />
+                    <barchart-widget ref="barchart" />
                 </el-col>
             </el-row>
             <el-row :gutter="20">
