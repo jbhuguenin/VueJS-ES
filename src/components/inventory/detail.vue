@@ -9,8 +9,10 @@
             <button type="button" class="el-carousel__arrow el-carousel__arrow--left" @click="slideLeft"><i class="el-icon-arrow-left"></i></button>
         </div>
         <div class="child">
-           <keep-alive>
-                <component :is="currentView"  :hostName="data.hostname"></component>
+            <keep-alive>
+                <transition name="slide">
+                <component :is="currentView"  :key="currentIndex" :hostName="data.hostname" :currentProps="currentProps"></component>
+                </transition>
             </keep-alive>
         </div>
         <div>
@@ -22,25 +24,93 @@
 
 import cpuUsage from '../widget/services/cpuUsage'
 import memoryUsage from '../widget/services/memoryUsage'
+import counter from '../widget/services/counter'
+import supplyLevel from '../widget/services/supplyLevel'
+
+const Services = [{
+    id: 'cpuUsage',
+    name: 'CPU Utilisation'
+},
+{
+    id: 'memoryUsage',
+    name: 'RAM Utilisation'
+},
+{
+    id: 'counter',
+    name: 'KM_Color_Print_Counter'
+},
+{
+    id: 'counter',
+    name: 'KM_Color_Copy'
+},
+{
+    id: 'counter',
+    name: 'KM_2_Color_Print_Counter'
+},
+{
+    id: 'counter',
+    name: 'Large_Printer_FullColor'
+},
+{
+    id: 'counter',
+    name: 'KM_Color_Copy'
+},
+{
+    id: 'counter',
+    name: 'KM_Fax_Color'
+},
+{
+    id: 'counter',
+    name: 'KM_Fax_Monochrome'
+},
+{
+    id: 'counter',
+    name: 'KM_Scan_Total'
+},
+{
+    id: 'counter',
+    name: 'Large_Copy_FullColor'
+},
+{
+    id: 'counter',
+    name: 'Large_Copy_BlackColor'
+},
+{
+    id: 'counter',
+    name: 'Large_Copy_FullColor'
+},
+{
+    id: 'supplyLevel',
+    name: 'PrtSupplyLevel'
+}
+];
 
 export default {
     props: ['data'],
-    components: {cpuUsage, memoryUsage},
+    components: {cpuUsage, memoryUsage, counter, supplyLevel},
     data: function() {
         return {
             currentIndex: 0,
             currentView: "",
-            components: []
+            components: [],
+            currentServices: []
+        }
+    },
+    computed: {
+        currentProps() {
+            return this.currentServices[this.currentIndex];
         }
     },
     mounted: function() {
         let self = this;
         this.data.services.map(function(element) {
-            if(element.name === 'CPU Utilisation') {
-                self.components.push('cpuUsage');
-            }
-            if (element.name === 'RAM Utilisation') {
-                self.components.push('memoryUsage');
+            let service = Services.find(function(service) {
+                return service.name === element.name;
+            });
+
+            if (service) {
+                self.components.push(service.id);
+                self.currentServices.push(element);
             }
         });
 
@@ -62,13 +132,33 @@ export default {
 }
 </script>
 
-<style scoped>
+<style >
 .child {
+    width: 100%;
+    min-height: 600px;
+    position: relative;
+}
+.child > div {
+    position:absolute;
     width: 100%;
 }
 i.el-icon-close {
     cursor:pointer;
 }
+canvas {
+    margin: auto;
+}
 
+
+.slide-leave-active,
+.slide-enter-active {
+  transition: .2s;
+}
+.slide-enter {
+  transform: translate(100%, 0);
+}
+.slide-leave-to {
+  transform: translate(-100%, 0);
+}
 </style>
 

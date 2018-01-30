@@ -21,12 +21,13 @@ export default {
                 labels: [], 
                 datasets:[{
                     data: [],
-                    fill: false,
+                    // fill: false,
+                    backgroundColor: "rgba(246,254,31,.4)",
                     label: 'CPU Usage',
-                    borderColor: '#fe8b36',
-                    backgroundColor: '#fe8b36',
+                    borderColor: "rgba(246,254,31,1)",
+                    // backgroundColor: '#fe8b36',
                     type: 'line',
-                    lineTension: 0
+                    // lineTension: 0
                 }]
             },
             options: {
