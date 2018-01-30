@@ -26,6 +26,7 @@ import cpuUsage from '../widget/services/cpuUsage'
 import memoryUsage from '../widget/services/memoryUsage'
 import counter from '../widget/services/counter'
 import supplyLevel from '../widget/services/supplyLevel'
+import diskSpace from '../widget/services/diskSpace'
 
 const Services = [{
     id: 'cpuUsage',
@@ -82,12 +83,20 @@ const Services = [{
 {
     id: 'supplyLevel',
     name: 'PrtSupplyLevel'
+},
+{
+    id: 'diskSpace',
+    name: 'Disk Space - C:'
+},
+{
+    id: 'diskSpace',
+    name: 'Disk Space Data - D:'
 }
 ];
 
 export default {
     props: ['data'],
-    components: {cpuUsage, memoryUsage, counter, supplyLevel},
+    components: {cpuUsage, memoryUsage, counter, supplyLevel, diskSpace},
     data: function() {
         return {
             currentIndex: 0,
