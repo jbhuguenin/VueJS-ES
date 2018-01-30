@@ -99,5 +99,8 @@ export default {
   canvas {
       margin:auto;
   }
+    h5 {
+      text-align: center;
+  }
 </style>
 

@@ -1,5 +1,6 @@
 <template>
     <div v-if="data.loaded" style="min-height:450px;" v-loading="!data.loaded">
+        <h5>{{currentProps.name}}</h5>
         <line-chart :data="data" :options="options" :height="400" :width="800" />
     </div>
 </template>
@@ -13,7 +14,7 @@ import moment from "moment";
 export default {
     mixins: [Mixins],
     components: { LineChart },
-    props: ['hostName'],
+    props: ['hostName', 'currentProps'],
     data() {
         return {
             data: {
@@ -96,6 +97,9 @@ export default {
 <style>
   canvas {
       margin:auto;
+  }
+    h5 {
+      text-align: center;
   }
 </style>
 
