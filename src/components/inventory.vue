@@ -97,7 +97,7 @@ export default {
       var self = this;
 
        this.getClient().search({
-         index: "test*",
+         index: "testreindex",
          body: {
            "aggs": {
             "hostname": {
